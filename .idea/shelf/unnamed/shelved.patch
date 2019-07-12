@@ -1,0 +1,429 @@
+Index: src/pack/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package pack;\n\nimport javafx.util.Pair;\nimport sun.reflect.generics.tree.Tree;\n\nimport java.io.*;\nimport java.util.*;\n\n/*Есть входной файл с набором слов, написанных через пробел\nНеобходимо:\nПрочитать слова из файла.   -- ArrayList<String> arr (C//:sdsds)\nОтсортировать в алфавитном порядке. -- ArrayList<String> arr (ArrayList<String> returnArr)\nПосчитать сколько раз каждое слово встречается в файле. -- ArrayList<String> returnArr (HashMap<String, Integer> )\nВывести статистику на консоль  -- HashMap<String, Integer>\nНайти слово с максимальным количеством повторений.  -- HashMap<String, Integer> (entry.keySet())\nВывести на консоль это слово и сколько раз оно встречается в  -- entry.keySet()\nфайле*/\npublic class Main {\n\n    public static void maxPovtorov(HashMap<String, Integer> map) {\n        int maxValueInMap = Collections.max(map.values());\n        for (Map.Entry<String, Integer> entry : map.entrySet()) {\n            if (entry.getValue() == maxValueInMap) {\n                System.out.println(\"Слово с максимальным кол-вом повторов - \" + entry.getKey());\n            }\n        }\n    }\n\n    public static void printStatMap(HashMap<String, Integer> printMap) {\n        for (Map.Entry<String, Integer> entry : printMap.entrySet()) {\n            String key = entry.getKey();\n            Integer value = entry.getValue();\n            System.out.println(\"Слово: \" + key + \" \" + \"Кол-во раз: \" + value);\n        }\n    }\n\n    public static HashMap<String, Integer> countSameWordsFromFile(ArrayList<String> arrayList) {\n        HashMap<String, Integer> map = new HashMap<>();\n        for (int i = 0; i < arrayList.size(); i++) {\n            String c = arrayList.get(i);\n            if (map.containsKey(c)) {\n                map.put(c, map.get(c) + 1);\n            } else {\n                map.put(c, 1);\n            }\n        }\n        return map;\n    }\n\n    public static ArrayList<String> readWordsFromFile(String filename) throws IOException {\n        BufferedReader reader = new BufferedReader(new FileReader(filename));\n        String line = null;\n        ArrayList<String> arr = new ArrayList<>();\n        while ((line = reader.readLine()) != null) {\n            String[] s1 = line.split(\"\\\\s+\");\n            for (int i = 0; i < s1.length; i++) {\n                arr.add(s1[i]);\n            }\n        }\n        return arr;\n    }\n\n    public static ArrayList<String> sortFromArrayABC(ArrayList<String> returnArr) {\n        boolean flag = false;\n        String temp;\n        while (!flag) {\n            flag = true;\n            for (int i = 0; i < returnArr.size() - 1; i++) {\n                if (returnArr.get(i).compareTo(returnArr.get(i + 1)) > 0) {\n                    flag = false;\n                    temp = returnArr.get(i);\n                    returnArr.set(i, returnArr.get(i + 1));\n                    returnArr.set(i + 1, temp);\n                }\n            }\n        }\n        return returnArr;\n    }\n\n\n    public static void main(String[] args) throws IOException {\n            String filename = \"C:\\\\Users\\\\Ariec\\\\text.txt\";\n            ArrayList<String > testList = readWordsFromFile(filename);\n            testList = sortFromArrayABC(testList);\n           HashMap<String,Integer> testList1 = countSameWordsFromFile(testList);\n           printStatMap(testList1);\n           maxPovtorov(testList1);\n        }\n    }
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/pack/Main.java	(revision 55e13224b349c66b41fa7635fa4feb5d1c2ef442)
++++ src/pack/Main.java	(revision )
+@@ -76,9 +76,10 @@
+         }
+         return returnArr;
+     }
++}
+ 
+ 
+-    public static void main(String[] args) throws IOException {
++   /* public static void main(String[] args) throws IOException {
+             String filename = "C:\\Users\\Ariec\\text.txt";
+             ArrayList<String > testList = readWordsFromFile(filename);
+             testList = sortFromArrayABC(testList);
+@@ -86,4 +87,4 @@
+            printStatMap(testList1);
+            maxPovtorov(testList1);
+         }
+-    }
+\ No newline at end of file
++    }*/
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"8f59c467-8fc4-454f-8523-fc5d51ad3d89\" name=\"Default\" comment=\"\">\n      <change type=\"NEW\" beforePath=\"\" afterPath=\"$PROJECT_DIR$/src/packArr/MainArrayListCLass.java\" />\n      <change type=\"NEW\" beforePath=\"\" afterPath=\"$PROJECT_DIR$/src/packArr/ValuesClass.java\" />\n      <change type=\"MODIFICATION\" beforePath=\"$PROJECT_DIR$/src/pack/Main.java\" afterPath=\"$PROJECT_DIR$/src/pack/Main.java\" />\n    </list>\n    <ignored path=\"$PROJECT_DIR$/out/\" />\n    <option name=\"EXCLUDED_CONVERTED_TO_IGNORED\" value=\"true\" />\n    <option name=\"TRACKING_ENABLED\" value=\"true\" />\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ExecutionTargetManager\" SELECTED_TARGET=\"default_target\" />\n  <component name=\"FileEditorManager\">\n    <leaf SIDE_TABS_SIZE_LIMIT_KEY=\"300\">\n      <file leaf-file-name=\"Main.java\" pinned=\"false\" current-in-tab=\"false\">\n        <entry file=\"file://$PROJECT_DIR$/src/pack/Main.java\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"213\">\n              <caret line=\"50\" column=\"29\" lean-forward=\"false\" selection-start-line=\"50\" selection-start-column=\"29\" selection-end-line=\"50\" selection-end-column=\"29\" />\n              <folding>\n                <element signature=\"imports\" expanded=\"true\" />\n              </folding>\n            </state>\n          </provider>\n        </entry>\n      </file>\n      <file leaf-file-name=\"ValuesClass.java\" pinned=\"false\" current-in-tab=\"false\">\n        <entry file=\"file://$PROJECT_DIR$/src/packArr/ValuesClass.java\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"379\">\n              <caret line=\"59\" column=\"0\" lean-forward=\"false\" selection-start-line=\"59\" selection-start-column=\"0\" selection-end-line=\"59\" selection-end-column=\"0\" />\n              <folding>\n                <element signature=\"e#1130#1131#0\" expanded=\"true\" />\n                <element signature=\"e#1183#1184#0\" expanded=\"true\" />\n              </folding>\n            </state>\n          </provider>\n        </entry>\n      </file>\n      <file leaf-file-name=\"MainArrayListCLass.java\" pinned=\"false\" current-in-tab=\"true\">\n        <entry file=\"file://$PROJECT_DIR$/src/packArr/MainArrayListCLass.java\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"484\">\n              <caret line=\"22\" column=\"15\" lean-forward=\"false\" selection-start-line=\"22\" selection-start-column=\"15\" selection-end-line=\"22\" selection-end-column=\"15\" />\n              <folding>\n                <element signature=\"imports\" expanded=\"true\" />\n              </folding>\n            </state>\n          </provider>\n        </entry>\n      </file>\n    </leaf>\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GradleLocalSettings\">\n    <option name=\"externalProjectsViewState\">\n      <projects_view />\n    </option>\n  </component>\n  <component name=\"IdeDocumentHistory\">\n    <option name=\"CHANGED_PATHS\">\n      <list>\n        <option value=\"$PROJECT_DIR$/src/pack/ValClass.java\" />\n        <option value=\"$PROJECT_DIR$/src/pack/MainArrClass.java\" />\n        <option value=\"$PROJECT_DIR$/src/packArr/ValuesClass.java\" />\n        <option value=\"$PROJECT_DIR$/src/packArr/MainArrayListCLass.java\" />\n        <option value=\"$PROJECT_DIR$/src/pack/Main.java\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"JsBuildToolGruntFileManager\" detection-done=\"true\" sorting=\"DEFINITION_ORDER\" />\n  <component name=\"JsBuildToolPackageJson\" detection-done=\"true\" sorting=\"DEFINITION_ORDER\" />\n  <component name=\"JsGulpfileManager\">\n    <detection-done>true</detection-done>\n    <sorting>DEFINITION_ORDER</sorting>\n  </component>\n  <component name=\"ProjectFrameBounds\">\n    <option name=\"x\" value=\"-8\" />\n    <option name=\"y\" value=\"-8\" />\n    <option name=\"width\" value=\"1936\" />\n    <option name=\"height\" value=\"1056\" />\n  </component>\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectView\">\n    <navigator currentView=\"ProjectPane\" proportions=\"\" version=\"1\">\n      <flattenPackages />\n      <showMembers />\n      <showModules />\n      <showLibraryContents />\n      <hideEmptyPackages />\n      <abbreviatePackageNames />\n      <autoscrollToSource />\n      <autoscrollFromSource />\n      <sortByType />\n      <manualOrder />\n      <foldersAlwaysOnTop value=\"true\" />\n    </navigator>\n    <panes>\n      <pane id=\"ProjectPane\">\n        <subPane>\n          <PATH>\n            <PATH_ELEMENT>\n              <option name=\"myItemId\" value=\"DZ2map\" />\n              <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\n            </PATH_ELEMENT>\n            <PATH_ELEMENT>\n              <option name=\"myItemId\" value=\"DZ2map\" />\n              <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n            </PATH_ELEMENT>\n          </PATH>\n          <PATH>\n            <PATH_ELEMENT>\n              <option name=\"myItemId\" value=\"DZ2map\" />\n              <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\n            </PATH_ELEMENT>\n            <PATH_ELEMENT>\n              <option name=\"myItemId\" value=\"DZ2map\" />\n              <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n            </PATH_ELEMENT>\n            <PATH_ELEMENT>\n              <option name=\"myItemId\" value=\"src\" />\n              <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n            </PATH_ELEMENT>\n            <PATH_ELEMENT>\n              <option name=\"myItemId\" value=\"packArr\" />\n              <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n            </PATH_ELEMENT>\n          </PATH>\n          <PATH>\n            <PATH_ELEMENT>\n              <option name=\"myItemId\" value=\"DZ2map\" />\n              <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\n            </PATH_ELEMENT>\n            <PATH_ELEMENT>\n              <option name=\"myItemId\" value=\"DZ2map\" />\n              <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n            </PATH_ELEMENT>\n            <PATH_ELEMENT>\n              <option name=\"myItemId\" value=\"src\" />\n              <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n            </PATH_ELEMENT>\n            <PATH_ELEMENT>\n              <option name=\"myItemId\" value=\"pack\" />\n              <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n            </PATH_ELEMENT>\n          </PATH>\n        </subPane>\n      </pane>\n      <pane id=\"Scratches\" />\n      <pane id=\"PackagesPane\" />\n      <pane id=\"Scope\" />\n    </panes>\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\n    <property name=\"aspect.path.notification.shown\" value=\"true\" />\n    <property name=\"settings.editor.selected.configurable\" value=\"File.Encoding\" />\n  </component>\n  <component name=\"RunDashboard\">\n    <option name=\"ruleStates\">\n      <list>\n        <RuleState>\n          <option name=\"name\" value=\"ConfigurationTypeDashboardGroupingRule\" />\n        </RuleState>\n        <RuleState>\n          <option name=\"name\" value=\"StatusDashboardGroupingRule\" />\n        </RuleState>\n      </list>\n    </option>\n  </component>\n  <component name=\"RunManager\" selected=\"Application.MainArrayListCLass\">\n    <configuration default=\"false\" name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <extension name=\"coverage\" enabled=\"false\" merge=\"false\" sample_coverage=\"true\" runner=\"idea\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"pack.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <option name=\"MAIN_CLASS_NAME\" value=\"pack.Main\" />\n      <option name=\"VM_PARAMETERS\" />\n      <option name=\"PROGRAM_PARAMETERS\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"false\" />\n      <option name=\"ALTERNATIVE_JRE_PATH\" />\n      <option name=\"ENABLE_SWING_INSPECTOR\" value=\"false\" />\n      <option name=\"ENV_VARIABLES\" />\n      <option name=\"PASS_PARENT_ENVS\" value=\"true\" />\n      <module name=\"DZ2map\" />\n      <envs />\n      <method />\n    </configuration>\n    <configuration default=\"false\" name=\"MainArrayListCLass\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <extension name=\"coverage\" enabled=\"false\" merge=\"false\" sample_coverage=\"true\" runner=\"idea\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"packArr.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <option name=\"MAIN_CLASS_NAME\" value=\"packArr.MainArrayListCLass\" />\n      <option name=\"VM_PARAMETERS\" />\n      <option name=\"PROGRAM_PARAMETERS\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"false\" />\n      <option name=\"ALTERNATIVE_JRE_PATH\" />\n      <option name=\"ENABLE_SWING_INSPECTOR\" value=\"false\" />\n      <option name=\"ENV_VARIABLES\" />\n      <option name=\"PASS_PARENT_ENVS\" value=\"true\" />\n      <module name=\"DZ2map\" />\n      <envs />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"#org.jetbrains.idea.devkit.run.PluginConfigurationType\" factoryName=\"Plugin\">\n      <module name=\"\" />\n      <option name=\"VM_PARAMETERS\" value=\"-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea\" />\n      <option name=\"PROGRAM_PARAMETERS\" />\n      <predefined_log_file id=\"idea.log\" enabled=\"true\" />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"AndroidRunConfigurationType\" factoryName=\"Android App\">\n      <module name=\"\" />\n      <option name=\"DEPLOY\" value=\"true\" />\n      <option name=\"ARTIFACT_NAME\" value=\"\" />\n      <option name=\"PM_INSTALL_OPTIONS\" value=\"\" />\n      <option name=\"ACTIVITY_EXTRA_FLAGS\" value=\"\" />\n      <option name=\"MODE\" value=\"default_activity\" />\n      <option name=\"TARGET_SELECTION_MODE\" value=\"SHOW_DIALOG\" />\n      <option name=\"PREFERRED_AVD\" value=\"\" />\n      <option name=\"CLEAR_LOGCAT\" value=\"false\" />\n      <option name=\"SHOW_LOGCAT_AUTOMATICALLY\" value=\"false\" />\n      <option name=\"SKIP_NOOP_APK_INSTALLATIONS\" value=\"true\" />\n      <option name=\"FORCE_STOP_RUNNING_APP\" value=\"true\" />\n      <option name=\"DEBUGGER_TYPE\" value=\"Java\" />\n      <option name=\"USE_LAST_SELECTED_DEVICE\" value=\"false\" />\n      <option name=\"PREFERRED_AVD\" value=\"\" />\n      <Java />\n      <Profilers>\n        <option name=\"ENABLE_ADVANCED_PROFILING\" value=\"true\" />\n        <option name=\"GAPID_ENABLED\" value=\"false\" />\n        <option name=\"GAPID_DISABLE_PCS\" value=\"false\" />\n        <option name=\"SUPPORT_LIB_ENABLED\" value=\"true\" />\n        <option name=\"INSTRUMENTATION_ENABLED\" value=\"true\" />\n      </Profilers>\n      <option name=\"DEEP_LINK\" value=\"\" />\n      <option name=\"ACTIVITY_CLASS\" value=\"\" />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"AndroidTestRunConfigurationType\" factoryName=\"Android Tests\">\n      <module name=\"\" />\n      <option name=\"TESTING_TYPE\" value=\"0\" />\n      <option name=\"INSTRUMENTATION_RUNNER_CLASS\" value=\"\" />\n      <option name=\"METHOD_NAME\" value=\"\" />\n      <option name=\"CLASS_NAME\" value=\"\" />\n      <option name=\"PACKAGE_NAME\" value=\"\" />\n      <option name=\"EXTRA_OPTIONS\" value=\"\" />\n      <option name=\"TARGET_SELECTION_MODE\" value=\"SHOW_DIALOG\" />\n      <option name=\"PREFERRED_AVD\" value=\"\" />\n      <option name=\"CLEAR_LOGCAT\" value=\"false\" />\n      <option name=\"SHOW_LOGCAT_AUTOMATICALLY\" value=\"false\" />\n      <option name=\"SKIP_NOOP_APK_INSTALLATIONS\" value=\"true\" />\n      <option name=\"FORCE_STOP_RUNNING_APP\" value=\"true\" />\n      <option name=\"DEBUGGER_TYPE\" value=\"Java\" />\n      <option name=\"USE_LAST_SELECTED_DEVICE\" value=\"false\" />\n      <option name=\"PREFERRED_AVD\" value=\"\" />\n      <Java />\n      <Profilers>\n        <option name=\"ENABLE_ADVANCED_PROFILING\" value=\"true\" />\n        <option name=\"GAPID_ENABLED\" value=\"false\" />\n        <option name=\"GAPID_DISABLE_PCS\" value=\"false\" />\n        <option name=\"SUPPORT_LIB_ENABLED\" value=\"true\" />\n        <option name=\"INSTRUMENTATION_ENABLED\" value=\"true\" />\n      </Profilers>\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"Applet\" factoryName=\"Applet\">\n      <option name=\"HTML_USED\" value=\"false\" />\n      <option name=\"WIDTH\" value=\"400\" />\n      <option name=\"HEIGHT\" value=\"300\" />\n      <option name=\"POLICY_FILE\" value=\"$APPLICATION_HOME_DIR$/bin/appletviewer.policy\" />\n      <module />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"Application\" factoryName=\"Application\">\n      <extension name=\"coverage\" enabled=\"false\" merge=\"false\" sample_coverage=\"true\" runner=\"idea\" />\n      <option name=\"MAIN_CLASS_NAME\" />\n      <option name=\"VM_PARAMETERS\" />\n      <option name=\"PROGRAM_PARAMETERS\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"false\" />\n      <option name=\"ALTERNATIVE_JRE_PATH\" />\n      <option name=\"ENABLE_SWING_INSPECTOR\" value=\"false\" />\n      <option name=\"ENV_VARIABLES\" />\n      <option name=\"PASS_PARENT_ENVS\" value=\"true\" />\n      <module name=\"\" />\n      <envs />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"ArquillianJUnit\" factoryName=\"\" nameIsGenerated=\"true\">\n      <extension name=\"coverage\" enabled=\"false\" merge=\"false\" sample_coverage=\"true\" runner=\"idea\" />\n      <module name=\"\" />\n      <option name=\"arquillianRunConfiguration\">\n        <value>\n          <option name=\"containerStateName\" value=\"\" />\n        </value>\n      </option>\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"false\" />\n      <option name=\"ALTERNATIVE_JRE_PATH\" />\n      <option name=\"PACKAGE_NAME\" />\n      <option name=\"MAIN_CLASS_NAME\" />\n      <option name=\"METHOD_NAME\" />\n      <option name=\"TEST_OBJECT\" value=\"class\" />\n      <option name=\"VM_PARAMETERS\" />\n      <option name=\"PARAMETERS\" />\n      <option name=\"WORKING_DIRECTORY\" />\n      <option name=\"ENV_VARIABLES\" />\n      <option name=\"PASS_PARENT_ENVS\" value=\"true\" />\n      <option name=\"TEST_SEARCH_SCOPE\">\n        <value defaultName=\"singleModule\" />\n      </option>\n      <envs />\n      <patterns />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"ArquillianTestNG\" factoryName=\"\">\n      <extension name=\"coverage\" enabled=\"false\" merge=\"false\" sample_coverage=\"true\" runner=\"idea\" />\n      <module name=\"\" />\n      <option name=\"arquillianRunConfiguration\">\n        <value>\n          <option name=\"containerStateName\" value=\"\" />\n        </value>\n      </option>\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"false\" />\n      <option name=\"ALTERNATIVE_JRE_PATH\" />\n      <option name=\"SUITE_NAME\" />\n      <option name=\"PACKAGE_NAME\" />\n      <option name=\"MAIN_CLASS_NAME\" />\n      <option name=\"METHOD_NAME\" />\n      <option name=\"GROUP_NAME\" />\n      <option name=\"TEST_OBJECT\" value=\"CLASS\" />\n      <option name=\"VM_PARAMETERS\" />\n      <option name=\"PARAMETERS\" />\n      <option name=\"WORKING_DIRECTORY\" />\n      <option name=\"OUTPUT_DIRECTORY\" />\n      <option name=\"ANNOTATION_TYPE\" />\n      <option name=\"ENV_VARIABLES\" />\n      <option name=\"PASS_PARENT_ENVS\" value=\"true\" />\n      <option name=\"TEST_SEARCH_SCOPE\">\n        <value defaultName=\"singleModule\" />\n      </option>\n      <option name=\"USE_DEFAULT_REPORTERS\" value=\"false\" />\n      <option name=\"PROPERTIES_FILE\" />\n      <envs />\n      <properties />\n      <listeners />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"Cold Fusion runner description\" factoryName=\"Cold Fusion\" custom_browser=\"\" web_path=\"\">\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"CucumberJavaRunConfigurationType\" factoryName=\"Cucumber java\">\n      <extension name=\"coverage\" enabled=\"false\" merge=\"false\" sample_coverage=\"true\" runner=\"idea\" />\n      <option name=\"myFilePath\" />\n      <option name=\"GLUE\" />\n      <option name=\"myNameFilter\" />\n      <option name=\"myGeneratedName\" />\n      <option name=\"MAIN_CLASS_NAME\" />\n      <option name=\"VM_PARAMETERS\" />\n      <option name=\"PROGRAM_PARAMETERS\" />\n      <option name=\"WORKING_DIRECTORY\" />\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"false\" />\n      <option name=\"ALTERNATIVE_JRE_PATH\" />\n      <option name=\"ENABLE_SWING_INSPECTOR\" value=\"false\" />\n      <option name=\"ENV_VARIABLES\" />\n      <option name=\"PASS_PARENT_ENVS\" value=\"true\" />\n      <module name=\"\" />\n      <envs />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"FlashRunConfigurationType\" factoryName=\"Flash App\">\n      <option name=\"BCName\" value=\"\" />\n      <option name=\"IOSSimulatorSdkPath\" value=\"\" />\n      <option name=\"adlOptions\" value=\"\" />\n      <option name=\"airProgramParameters\" value=\"\" />\n      <option name=\"appDescriptorForEmulator\" value=\"Android\" />\n      <option name=\"debugTransport\" value=\"USB\" />\n      <option name=\"debuggerSdkRaw\" value=\"BC SDK\" />\n      <option name=\"emulator\" value=\"NexusOne\" />\n      <option name=\"emulatorAdlOptions\" value=\"\" />\n      <option name=\"fastPackaging\" value=\"true\" />\n      <option name=\"fullScreenHeight\" value=\"0\" />\n      <option name=\"fullScreenWidth\" value=\"0\" />\n      <option name=\"launchUrl\" value=\"false\" />\n      <option name=\"launcherParameters\">\n        <LauncherParameters>\n          <option name=\"browser\" value=\"a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8\" />\n          <option name=\"launcherType\" value=\"OSDefault\" />\n          <option name=\"newPlayerInstance\" value=\"false\" />\n          <option name=\"playerPath\" value=\"FlashPlayerDebugger.exe\" />\n        </LauncherParameters>\n      </option>\n      <option name=\"mobileRunTarget\" value=\"Emulator\" />\n      <option name=\"moduleName\" value=\"\" />\n      <option name=\"overriddenMainClass\" value=\"\" />\n      <option name=\"overriddenOutputFileName\" value=\"\" />\n      <option name=\"overrideMainClass\" value=\"false\" />\n      <option name=\"runTrusted\" value=\"true\" />\n      <option name=\"screenDpi\" value=\"0\" />\n      <option name=\"screenHeight\" value=\"0\" />\n      <option name=\"screenWidth\" value=\"0\" />\n      <option name=\"url\" value=\"http://\" />\n      <option name=\"usbDebugPort\" value=\"7936\" />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"FlexUnitRunConfigurationType\" factoryName=\"FlexUnit\" appDescriptorForEmulator=\"Android\" class_name=\"\" emulatorAdlOptions=\"\" method_name=\"\" package_name=\"\" scope=\"Class\">\n      <option name=\"BCName\" value=\"\" />\n      <option name=\"launcherParameters\">\n        <LauncherParameters>\n          <option name=\"browser\" value=\"a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8\" />\n          <option name=\"launcherType\" value=\"OSDefault\" />\n          <option name=\"newPlayerInstance\" value=\"false\" />\n          <option name=\"playerPath\" value=\"FlashPlayerDebugger.exe\" />\n        </LauncherParameters>\n      </option>\n      <option name=\"moduleName\" value=\"\" />\n      <option name=\"trusted\" value=\"true\" />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\">\n      <ExternalSystemSettings>\n        <option name=\"executionName\" />\n        <option name=\"externalProjectPath\" />\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\n        <option name=\"scriptParameters\" />\n        <option name=\"taskDescriptions\">\n          <list />\n        </option>\n        <option name=\"taskNames\">\n          <list />\n        </option>\n        <option name=\"vmOptions\" />\n      </ExternalSystemSettings>\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"GrailsRunConfigurationType\" factoryName=\"Grails\">\n      <setting name=\"vmparams\" value=\"\" />\n      <setting name=\"cmdLine\" value=\"run-app\" />\n      <setting name=\"passParentEnv\" value=\"true\" />\n      <setting name=\"launchBrowser\" value=\"true\" />\n      <setting name=\"launchBrowserUrl\" value=\"\" />\n      <setting name=\"depsClasspath\" value=\"false\" />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"JUnit\" factoryName=\"JUnit\">\n      <extension name=\"coverage\" enabled=\"false\" merge=\"false\" sample_coverage=\"true\" runner=\"idea\" />\n      <module name=\"\" />\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"false\" />\n      <option name=\"ALTERNATIVE_JRE_PATH\" />\n      <option name=\"PACKAGE_NAME\" />\n      <option name=\"MAIN_CLASS_NAME\" />\n      <option name=\"METHOD_NAME\" />\n      <option name=\"TEST_OBJECT\" value=\"class\" />\n      <option name=\"VM_PARAMETERS\" value=\"-ea\" />\n      <option name=\"PARAMETERS\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$MODULE_DIR$\" />\n      <option name=\"ENV_VARIABLES\" />\n      <option name=\"PASS_PARENT_ENVS\" value=\"true\" />\n      <option name=\"TEST_SEARCH_SCOPE\">\n        <value defaultName=\"singleModule\" />\n      </option>\n      <envs />\n      <patterns />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"JarApplication\" factoryName=\"JAR Application\">\n      <extension name=\"coverage\" enabled=\"false\" merge=\"false\" sample_coverage=\"true\" runner=\"idea\" />\n      <envs />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"Java Scratch\" factoryName=\"Java Scratch\">\n      <extension name=\"coverage\" enabled=\"false\" merge=\"false\" sample_coverage=\"true\" runner=\"idea\" />\n      <option name=\"SCRATCH_FILE_ID\" value=\"0\" />\n      <option name=\"MAIN_CLASS_NAME\" />\n      <option name=\"VM_PARAMETERS\" />\n      <option name=\"PROGRAM_PARAMETERS\" />\n      <option name=\"WORKING_DIRECTORY\" />\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"false\" />\n      <option name=\"ALTERNATIVE_JRE_PATH\" />\n      <option name=\"ENABLE_SWING_INSPECTOR\" value=\"false\" />\n      <option name=\"ENV_VARIABLES\" />\n      <option name=\"PASS_PARENT_ENVS\" value=\"true\" />\n      <module name=\"\" />\n      <envs />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"JavaScriptTestRunnerJest\" factoryName=\"Jest\">\n      <node-interpreter value=\"project\" />\n      <working-dir value=\"\" />\n      <envs />\n      <scope-kind value=\"ALL\" />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"JavaScriptTestRunnerProtractor\" factoryName=\"Protractor\">\n      <config-file value=\"\" />\n      <node-interpreter value=\"project\" />\n      <envs />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"JavascriptDebugType\" factoryName=\"JavaScript Debug\">\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"JetRunConfigurationType\" factoryName=\"Kotlin\">\n      <extension name=\"coverage\" enabled=\"false\" merge=\"false\" sample_coverage=\"true\" runner=\"idea\" />\n      <option name=\"MAIN_CLASS_NAME\" />\n      <option name=\"VM_PARAMETERS\" />\n      <option name=\"PROGRAM_PARAMETERS\" />\n      <option name=\"WORKING_DIRECTORY\" />\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"false\" />\n      <option name=\"ALTERNATIVE_JRE_PATH\" />\n      <option name=\"PASS_PARENT_ENVS\" value=\"true\" />\n      <module name=\"DZ2map\" />\n      <envs />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"KotlinStandaloneScriptRunConfigurationType\" factoryName=\"Kotlin script\">\n      <extension name=\"coverage\" enabled=\"false\" merge=\"false\" sample_coverage=\"true\" runner=\"idea\" />\n      <option name=\"filePath\" />\n      <option name=\"vmParameters\" />\n      <option name=\"alternativeJrePath\" />\n      <option name=\"programParameters\" />\n      <option name=\"passParentEnvs\" value=\"true\" />\n      <option name=\"workingDirectory\" />\n      <option name=\"isAlternativeJrePathEnabled\" value=\"false\" />\n      <envs />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"Remote\" factoryName=\"Remote\">\n      <option name=\"USE_SOCKET_TRANSPORT\" value=\"true\" />\n      <option name=\"SERVER_MODE\" value=\"false\" />\n      <option name=\"SHMEM_ADDRESS\" value=\"javadebug\" />\n      <option name=\"HOST\" value=\"localhost\" />\n      <option name=\"PORT\" value=\"5005\" />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\">\n      <extension name=\"coverage\" enabled=\"false\" merge=\"false\" sample_coverage=\"true\" runner=\"idea\" />\n      <module name=\"\" />\n      <envs />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"TestNG\" factoryName=\"TestNG\">\n      <extension name=\"coverage\" enabled=\"false\" merge=\"false\" sample_coverage=\"true\" runner=\"idea\" />\n      <module name=\"\" />\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"false\" />\n      <option name=\"ALTERNATIVE_JRE_PATH\" />\n      <option name=\"SUITE_NAME\" />\n      <option name=\"PACKAGE_NAME\" />\n      <option name=\"MAIN_CLASS_NAME\" />\n      <option name=\"METHOD_NAME\" />\n      <option name=\"GROUP_NAME\" />\n      <option name=\"TEST_OBJECT\" value=\"CLASS\" />\n      <option name=\"VM_PARAMETERS\" value=\"-ea\" />\n      <option name=\"PARAMETERS\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$MODULE_DIR$\" />\n      <option name=\"OUTPUT_DIRECTORY\" />\n      <option name=\"ANNOTATION_TYPE\" />\n      <option name=\"ENV_VARIABLES\" />\n      <option name=\"PASS_PARENT_ENVS\" value=\"true\" />\n      <option name=\"TEST_SEARCH_SCOPE\">\n        <value defaultName=\"singleModule\" />\n      </option>\n      <option name=\"USE_DEFAULT_REPORTERS\" value=\"false\" />\n      <option name=\"PROPERTIES_FILE\" />\n      <envs />\n      <properties />\n      <listeners />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"js.build_tools.gulp\" factoryName=\"Gulp.js\">\n      <node-interpreter>project</node-interpreter>\n      <node-options />\n      <gulpfile />\n      <tasks />\n      <arguments />\n      <envs />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"js.build_tools.npm\" factoryName=\"npm\">\n      <command value=\"run\" />\n      <scripts />\n      <node-interpreter value=\"project\" />\n      <envs />\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"osgi.bnd.run\" factoryName=\"Run Launcher\">\n      <method />\n    </configuration>\n    <configuration default=\"true\" type=\"osgi.bnd.run\" factoryName=\"Test Launcher (JUnit)\">\n      <method />\n    </configuration>\n    <list size=\"2\">\n      <item index=\"0\" class=\"java.lang.String\" itemvalue=\"Application.Main\" />\n      <item index=\"1\" class=\"java.lang.String\" itemvalue=\"Application.MainArrayListCLass\" />\n    </list>\n    <recent_temporary>\n      <list size=\"2\">\n        <item index=\"0\" class=\"java.lang.String\" itemvalue=\"Application.MainArrayListCLass\" />\n        <item index=\"1\" class=\"java.lang.String\" itemvalue=\"Application.Main\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"ShelveChangesManager\" show_recycled=\"false\">\n    <option name=\"remove_strategy\" value=\"false\" />\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"8f59c467-8fc4-454f-8523-fc5d51ad3d89\" name=\"Default\" comment=\"\" />\n      <created>1562784599677</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1562784599677</updated>\n      <workItem from=\"1562784602978\" duration=\"13984000\" />\n      <workItem from=\"1562855631312\" duration=\"711000\" />\n      <workItem from=\"1562877502481\" duration=\"6324000\" />\n      <workItem from=\"1562884824312\" duration=\"2371000\" />\n    </task>\n    <servers />\n  </component>\n  <component name=\"TimeTrackingManager\">\n    <option name=\"totallyTimeSpent\" value=\"23390000\" />\n  </component>\n  <component name=\"ToolWindowManager\">\n    <frame x=\"-8\" y=\"-8\" width=\"1936\" height=\"1056\" extended-state=\"6\" />\n    <editor active=\"true\" />\n    <layout>\n      <window_info id=\"Palette\" active=\"false\" anchor=\"right\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"0\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"TODO\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"10\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Nl-Palette\" active=\"false\" anchor=\"left\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"0\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Messages\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.32980973\" sideWeight=\"0.5\" order=\"9\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Palette&#9;\" active=\"false\" anchor=\"right\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"7\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Image Layers\" active=\"false\" anchor=\"left\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"4\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Capture Analysis\" active=\"false\" anchor=\"right\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"9\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Event Log\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"0\" side_tool=\"true\" content_ui=\"tabs\" />\n      <window_info id=\"Maven Projects\" active=\"false\" anchor=\"right\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"1\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Version Control\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"2\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Run\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.32980973\" sideWeight=\"0.5\" order=\"5\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Properties\" active=\"false\" anchor=\"right\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"2\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Terminal\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"3\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Capture Tool\" active=\"false\" anchor=\"left\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"1\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Designer\" active=\"false\" anchor=\"left\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"2\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Project\" active=\"false\" anchor=\"left\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"true\" show_stripe_button=\"true\" weight=\"0.25\" sideWeight=\"0.5\" order=\"6\" side_tool=\"false\" content_ui=\"combo\" />\n      <window_info id=\"Database\" active=\"false\" anchor=\"right\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"3\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Structure\" active=\"false\" anchor=\"left\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.25\" sideWeight=\"0.5\" order=\"7\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Ant Build\" active=\"false\" anchor=\"right\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.25\" sideWeight=\"0.5\" order=\"8\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"UI Designer\" active=\"false\" anchor=\"left\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"3\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Theme Preview\" active=\"false\" anchor=\"right\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"6\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Favorites\" active=\"false\" anchor=\"left\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"5\" side_tool=\"true\" content_ui=\"tabs\" />\n      <window_info id=\"Debug\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.39957717\" sideWeight=\"0.5\" order=\"6\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Cvs\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.25\" sideWeight=\"0.5\" order=\"7\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Message\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"1\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Commander\" active=\"false\" anchor=\"right\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.4\" sideWeight=\"0.5\" order=\"4\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Hierarchy\" active=\"false\" anchor=\"right\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.25\" sideWeight=\"0.5\" order=\"5\" side_tool=\"false\" content_ui=\"combo\" />\n      <window_info id=\"Inspection\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.4\" sideWeight=\"0.5\" order=\"8\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Find\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"4\" side_tool=\"false\" content_ui=\"tabs\" />\n    </layout>\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"processedProjectFiles\" value=\"true\" />\n  </component>\n  <component name=\"VcsContentAnnotationSettings\">\n    <option name=\"myLimit\" value=\"2678400000\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"\" />\n  </component>\n  <component name=\"XDebuggerManager\">\n    <breakpoint-manager>\n      <option name=\"time\" value=\"52\" />\n    </breakpoint-manager>\n    <watches-manager>\n      <configuration name=\"Application\">\n        <watch expression=\"testList.get(11)\" />\n        <watch expression=\"testList.get(9)\" />\n        <watch expression=\"testList.get(0)\" />\n        <watch expression=\"testList\" />\n        <watch expression=\"arr1.get(7)\" />\n      </configuration>\n    </watches-manager>\n  </component>\n  <component name=\"antWorkspaceConfiguration\">\n    <option name=\"IS_AUTOSCROLL_TO_SOURCE\" value=\"false\" />\n    <option name=\"FILTER_TARGETS\" value=\"false\" />\n  </component>\n  <component name=\"editorHistoryManager\">\n    <entry file=\"file://$PROJECT_DIR$/src/pack/Main.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"272\">\n          <caret line=\"16\" column=\"7\" lean-forward=\"true\" selection-start-line=\"16\" selection-start-column=\"7\" selection-end-line=\"16\" selection-end-column=\"7\" />\n          <folding>\n            <element signature=\"imports\" expanded=\"true\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/packArr/ValuesClass.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"986\">\n          <caret line=\"58\" column=\"0\" lean-forward=\"true\" selection-start-line=\"58\" selection-start-column=\"0\" selection-end-line=\"58\" selection-end-column=\"0\" />\n          <folding>\n            <element signature=\"e#1130#1131#0\" expanded=\"true\" />\n            <element signature=\"e#1183#1184#0\" expanded=\"true\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/packArr/MainArrayListCLass.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"850\">\n          <caret line=\"50\" column=\"15\" lean-forward=\"false\" selection-start-line=\"50\" selection-start-column=\"15\" selection-end-line=\"50\" selection-end-column=\"15\" />\n          <folding>\n            <element signature=\"imports\" expanded=\"true\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/pack/Main.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"0\">\n          <caret line=\"0\" column=\"0\" lean-forward=\"false\" selection-start-line=\"0\" selection-start-column=\"0\" selection-end-line=\"0\" selection-end-column=\"0\" />\n          <folding>\n            <element signature=\"imports\" expanded=\"true\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/pack/Main.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"0\">\n          <caret line=\"0\" column=\"0\" lean-forward=\"false\" selection-start-line=\"0\" selection-start-column=\"0\" selection-end-line=\"0\" selection-end-column=\"0\" />\n          <folding>\n            <element signature=\"imports\" expanded=\"true\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/java/lang/String.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"303\">\n          <caret line=\"2420\" column=\"20\" lean-forward=\"false\" selection-start-line=\"2420\" selection-start-column=\"20\" selection-end-line=\"2420\" selection-end-column=\"20\" />\n          <folding>\n            <element signature=\"e#94598#94599#0\" expanded=\"false\" />\n            <element signature=\"e#94636#94637#0\" expanded=\"false\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"jar://C:/Program Files/Java/jdk1.8.0_201/javafx-src.zip!/javafx/util/Pair.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"250\">\n          <caret line=\"34\" column=\"13\" lean-forward=\"false\" selection-start-line=\"34\" selection-start-column=\"13\" selection-end-line=\"34\" selection-end-column=\"13\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/pack/ValClass.java\" />\n    <entry file=\"file://$PROJECT_DIR$/src/pack/MainArrClass.java\" />\n    <entry file=\"jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/java/util/ArrayList.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"307\">\n          <caret line=\"302\" column=\"19\" lean-forward=\"false\" selection-start-line=\"302\" selection-start-column=\"19\" selection-end-line=\"302\" selection-end-column=\"19\" />\n          <folding>\n            <element signature=\"e#11079#11080#0\" expanded=\"false\" />\n            <element signature=\"e#11117#11118#0\" expanded=\"false\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/packArr/ValuesClass.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"379\">\n          <caret line=\"59\" column=\"0\" lean-forward=\"false\" selection-start-line=\"59\" selection-start-column=\"0\" selection-end-line=\"59\" selection-end-column=\"0\" />\n          <folding>\n            <element signature=\"e#1130#1131#0\" expanded=\"true\" />\n            <element signature=\"e#1183#1184#0\" expanded=\"true\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/pack/Main.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"213\">\n          <caret line=\"50\" column=\"29\" lean-forward=\"false\" selection-start-line=\"50\" selection-start-column=\"29\" selection-end-line=\"50\" selection-end-column=\"29\" />\n          <folding>\n            <element signature=\"imports\" expanded=\"true\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/packArr/MainArrayListCLass.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"484\">\n          <caret line=\"22\" column=\"15\" lean-forward=\"false\" selection-start-line=\"22\" selection-start-column=\"15\" selection-end-line=\"22\" selection-end-column=\"15\" />\n          <folding>\n            <element signature=\"imports\" expanded=\"true\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision 55e13224b349c66b41fa7635fa4feb5d1c2ef442)
++++ .idea/workspace.xml	(revision )
+@@ -2,9 +2,10 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="8f59c467-8fc4-454f-8523-fc5d51ad3d89" name="Default" comment="">
+-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packArr/MainArrayListCLass.java" />
+-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packArr/ValuesClass.java" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pack/Main.java" afterPath="$PROJECT_DIR$/src/pack/Main.java" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packArr/MainArrayListCLass.java" afterPath="$PROJECT_DIR$/src/packArr/MainArrayListCLass.java" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packArr/ValuesClass.java" afterPath="$PROJECT_DIR$/src/packArr/ValuesClass.java" />
+     </list>
+     <ignored path="$PROJECT_DIR$/out/" />
+     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+@@ -20,8 +21,8 @@
+       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+         <entry file="file://$PROJECT_DIR$/src/pack/Main.java">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="213">
+-              <caret line="50" column="29" lean-forward="false" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
++            <state relative-caret-position="623">
++              <caret line="78" column="1" lean-forward="false" selection-start-line="78" selection-start-column="1" selection-end-line="78" selection-end-column="1" />
+               <folding>
+                 <element signature="imports" expanded="true" />
+               </folding>
+@@ -32,12 +33,9 @@
+       <file leaf-file-name="ValuesClass.java" pinned="false" current-in-tab="false">
+         <entry file="file://$PROJECT_DIR$/src/packArr/ValuesClass.java">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="379">
+-              <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+-              <folding>
+-                <element signature="e#1130#1131#0" expanded="true" />
+-                <element signature="e#1183#1184#0" expanded="true" />
+-              </folding>
++            <state relative-caret-position="574">
++              <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
++              <folding />
+             </state>
+           </provider>
+         </entry>
+@@ -45,8 +43,8 @@
+       <file leaf-file-name="MainArrayListCLass.java" pinned="false" current-in-tab="true">
+         <entry file="file://$PROJECT_DIR$/src/packArr/MainArrayListCLass.java">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="484">
+-              <caret line="22" column="15" lean-forward="false" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
++            <state relative-caret-position="637">
++              <caret line="63" column="3" lean-forward="false" selection-start-line="63" selection-start-column="3" selection-end-line="63" selection-end-column="3" />
+               <folding>
+                 <element signature="imports" expanded="true" />
+               </folding>
+@@ -76,9 +74,9 @@
+       <list>
+         <option value="$PROJECT_DIR$/src/pack/ValClass.java" />
+         <option value="$PROJECT_DIR$/src/pack/MainArrClass.java" />
++        <option value="$PROJECT_DIR$/src/pack/Main.java" />
+         <option value="$PROJECT_DIR$/src/packArr/ValuesClass.java" />
+         <option value="$PROJECT_DIR$/src/packArr/MainArrayListCLass.java" />
+-        <option value="$PROJECT_DIR$/src/pack/Main.java" />
+       </list>
+     </option>
+   </component>
+@@ -110,6 +108,9 @@
+       <foldersAlwaysOnTop value="true" />
+     </navigator>
+     <panes>
++      <pane id="Scratches" />
++      <pane id="PackagesPane" />
++      <pane id="Scope" />
+       <pane id="ProjectPane">
+         <subPane>
+           <PATH>
+@@ -160,9 +161,6 @@
+           </PATH>
+         </subPane>
+       </pane>
+-      <pane id="Scratches" />
+-      <pane id="PackagesPane" />
+-      <pane id="Scope" />
+     </panes>
+   </component>
+   <component name="PropertiesComponent">
+@@ -634,12 +632,13 @@
+       <workItem from="1562784602978" duration="13984000" />
+       <workItem from="1562855631312" duration="711000" />
+       <workItem from="1562877502481" duration="6324000" />
+-      <workItem from="1562884824312" duration="2371000" />
++      <workItem from="1562884824312" duration="2694000" />
++      <workItem from="1562927843096" duration="5581000" />
+     </task>
+     <servers />
+   </component>
+   <component name="TimeTrackingManager">
+-    <option name="totallyTimeSpent" value="23390000" />
++    <option name="totallyTimeSpent" value="29294000" />
+   </component>
+   <component name="ToolWindowManager">
+     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+@@ -660,7 +659,7 @@
+       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
++      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
+       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+@@ -675,6 +674,37 @@
+       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+     </layout>
++    <layout-to-restore>
++      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
++      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
++      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
++      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
++      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
++      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
++      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
++      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
++      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
++      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
++      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
++      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
++      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
++      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
++      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
++      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39957717" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
++      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
++      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
++      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
++      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
++      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
++      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
++      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
++      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
++      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
++      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
++      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
++      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
++      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
++    </layout-to-restore>
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="processedProjectFiles" value="true" />
+@@ -687,7 +717,7 @@
+   </component>
+   <component name="XDebuggerManager">
+     <breakpoint-manager>
+-      <option name="time" value="52" />
++      <option name="time" value="54" />
+     </breakpoint-manager>
+     <watches-manager>
+       <configuration name="Application">
+@@ -706,6 +736,34 @@
+   <component name="editorHistoryManager">
+     <entry file="file://$PROJECT_DIR$/src/pack/Main.java">
+       <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="850">
++          <caret line="50" column="29" lean-forward="false" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
++          <folding>
++            <element signature="imports" expanded="true" />
++          </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/packArr/ValuesClass.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="323">
++          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
++          <folding />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/packArr/MainArrayListCLass.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="170">
++          <caret line="10" column="3" lean-forward="true" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
++          <folding>
++            <element signature="imports" expanded="true" />
++          </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/pack/Main.java">
++      <provider selected="true" editor-type-id="text-editor">
+         <state relative-caret-position="272">
+           <caret line="16" column="7" lean-forward="true" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
+           <folding>
+@@ -718,10 +776,7 @@
+       <provider selected="true" editor-type-id="text-editor">
+         <state relative-caret-position="986">
+           <caret line="58" column="0" lean-forward="true" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+-          <folding>
+-            <element signature="e#1130#1131#0" expanded="true" />
+-            <element signature="e#1183#1184#0" expanded="true" />
+-          </folding>
++          <folding />
+         </state>
+       </provider>
+     </entry>
+@@ -786,31 +841,36 @@
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packArr/ValuesClass.java">
++    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/java/util/stream/Stream.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="379">
+-          <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+-          <folding>
+-            <element signature="e#1130#1131#0" expanded="true" />
+-            <element signature="e#1183#1184#0" expanded="true" />
+-          </folding>
++        <state relative-caret-position="324">
++          <caret line="198" column="0" lean-forward="true" selection-start-line="198" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
++          <folding />
+         </state>
+       </provider>
+     </entry>
+     <entry file="file://$PROJECT_DIR$/src/pack/Main.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="213">
+-          <caret line="50" column="29" lean-forward="false" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
++        <state relative-caret-position="623">
++          <caret line="78" column="1" lean-forward="false" selection-start-line="78" selection-start-column="1" selection-end-line="78" selection-end-column="1" />
+           <folding>
+             <element signature="imports" expanded="true" />
+           </folding>
+         </state>
+       </provider>
+     </entry>
++    <entry file="file://$PROJECT_DIR$/src/packArr/ValuesClass.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="574">
++          <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
++          <folding />
++        </state>
++      </provider>
++    </entry>
+     <entry file="file://$PROJECT_DIR$/src/packArr/MainArrayListCLass.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="484">
+-          <caret line="22" column="15" lean-forward="false" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
++        <state relative-caret-position="637">
++          <caret line="63" column="3" lean-forward="false" selection-start-line="63" selection-start-column="3" selection-end-line="63" selection-end-column="3" />
+           <folding>
+             <element signature="imports" expanded="true" />
+           </folding>
+Index: src/packArr/MainArrayListCLass.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package packArr;\n\nimport java.io.BufferedReader;\nimport java.io.FileReader;\nimport java.io.IOException;\nimport java.util.ArrayList;\nimport java.util.Collections;\nimport java.util.HashMap;\nimport java.util.Map;\n\n/**\n * Created by Ariec on 12.07.2019.\n */\npublic class MainArrayListCLass {\n\n    public static ArrayList<String> readWordsFromFile2(String filename) throws IOException {\n        BufferedReader reader = new BufferedReader(new FileReader(filename));\n        String line = null;\n        ArrayList<String> arr = new ArrayList<>();\n        while ((line = reader.readLine()) != null) {\n            String[] s1 = line.split(\"\\\\s+\");\n            for (int i = 0; i < s1.length; i++) {\n                arr.add(s1[i]);\n            }\n        }\n        return arr;\n    }\n\n    public static ArrayList<String> sortFromArrayABCD(ArrayList<String> returnArr) {\n        boolean flag = false;\n        String temp;\n        while (!flag) {\n            flag = true;\n            for (int i = 0; i < returnArr.size() - 1; i++) {\n                if (returnArr.get(i).compareTo(returnArr.get(i + 1)) > 0) {\n                    flag = false;\n                    temp = returnArr.get(i);\n                    returnArr.set(i, returnArr.get(i + 1));\n                    returnArr.set(i + 1, temp);\n                }\n            }\n        }\n        return returnArr;\n    }\n\n    public static int dopFuncPoiska(ArrayList<ValuesClass> arr, String s){\n        for (int i = 0; i < arr.size(); i++) {\n            if(s.equals(arr.get(i).getWord())){\n                return i;\n            }\n        }\n        return -1;\n    }\n\n    public static ArrayList<ValuesClass> countSameWordsFromFile(ArrayList<String> arrayList) {\n        ArrayList<ValuesClass> arr = new ArrayList<>();\n        for (int i = 0; i < arrayList.size(); i++) {\n           String c = arrayList.get(i);\n           int dopF=dopFuncPoiska(arr,c);\n           if(dopF!=-1){\n              ValuesClass abc =  arr.get(dopF);\n              abc.countPlusOne();\n           }else {\n               arr.add(new ValuesClass(c));\n           }\n        }\n        return arr;\n    }\n\n    public static void printStatArr(ArrayList<ValuesClass> printArr) {\n        for (int i = 0; i <printArr.size() ; i++) {\n            System.out.println(\"Слово: \" + printArr.get(i).getWord() + \" \" + \"Кол-во раз: \" + printArr.get(i).getCountWord() );\n        }\n    }\n    public static void maxPovtorov(ArrayList<ValuesClass> maxArrIndex) {\n        ValuesClass max=maxArrIndex.get(0);\n        for (int i = 1; i < maxArrIndex.size(); i++) {\n            if(maxArrIndex.get(i).getCountWord()>max.getCountWord()){\n              max=maxArrIndex.get(i);\n            }\n        }\n        System.out.println(\"Слово с максимальным кол-вом повторов - \" + max.toString());\n    }\n\n    public static void main(String[] args) throws IOException {\n        String filename = \"C:\\\\Users\\\\Ariec\\\\text.txt\";\n        ArrayList<String > testList = readWordsFromFile2(filename);\n        testList = sortFromArrayABCD(testList);\n        ArrayList<ValuesClass> arr1 = countSameWordsFromFile(testList);\n        printStatArr(arr1);\n        maxPovtorov(arr1);\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/packArr/MainArrayListCLass.java	(revision 55e13224b349c66b41fa7635fa4feb5d1c2ef442)
++++ src/packArr/MainArrayListCLass.java	(revision )
+@@ -4,6 +4,7 @@
+ import java.io.FileReader;
+ import java.io.IOException;
+ import java.util.ArrayList;
++import static java.util.stream.Collectors.toList;
+ import java.util.Collections;
+ import java.util.HashMap;
+ import java.util.Map;
+@@ -13,22 +14,11 @@
+  */
+ public class MainArrayListCLass {
+ 
+-    public static ArrayList<String> readWordsFromFile2(String filename) throws IOException {
+-        BufferedReader reader = new BufferedReader(new FileReader(filename));
+-        String line = null;
+-        ArrayList<String> arr = new ArrayList<>();
+-        while ((line = reader.readLine()) != null) {
+-            String[] s1 = line.split("\\s+");
+-            for (int i = 0; i < s1.length; i++) {
+-                arr.add(s1[i]);
+-            }
+-        }
+-        return arr;
+-    }
+ 
+-    public static ArrayList<String> sortFromArrayABCD(ArrayList<String> returnArr) {
++
++    public static ArrayList<ValuesClass> sortFromArrayABCD(ArrayList<ValuesClass> returnArr) {
+         boolean flag = false;
+-        String temp;
++        ValuesClass temp;
+         while (!flag) {
+             flag = true;
+             for (int i = 0; i < returnArr.size() - 1; i++) {
+@@ -52,20 +42,26 @@
+         return -1;
+     }
+ 
+-    public static ArrayList<ValuesClass> countSameWordsFromFile(ArrayList<String> arrayList) {
+-        ArrayList<ValuesClass> arr = new ArrayList<>();
+-        for (int i = 0; i < arrayList.size(); i++) {
+-           String c = arrayList.get(i);
+-           int dopF=dopFuncPoiska(arr,c);
+-           if(dopF!=-1){
+-              ValuesClass abc =  arr.get(dopF);
+-              abc.countPlusOne();
+-           }else {
+-               arr.add(new ValuesClass(c));
+-           }
+-        }
+-        return arr;
+-    }
++    public static ArrayList<ValuesClass> readWordsFromFile2(String filename) throws IOException {
++        BufferedReader reader = new BufferedReader(new FileReader(filename));
++        String line = null;
++        //ArrayList<String> arr = new ArrayList<>();
++        ArrayList<ValuesClass> arr1 = new ArrayList<>();
++
++        while ((line = reader.readLine()) != null) {
++            String[] s1 = line.split("\\s+");
++                for(String s : s1){
++                    ValuesClass valuesClass= new ValuesClass(s);
++                    if(!arr1.contains(valuesClass)){
++                        arr1.add(valuesClass);
++                    }else{
++                        ValuesClass val =arr1.get(arr1.indexOf(valuesClass));
++                        arr1.set(arr1.indexOf(valuesClass),new ValuesClass(val.getWord(),val.getCountWord()+1));
++                          }
++                     }
++                }
++                return arr1;
++          }
+ 
+     public static void printStatArr(ArrayList<ValuesClass> printArr) {
+         for (int i = 0; i <printArr.size() ; i++) {
+@@ -73,21 +69,22 @@
+         }
+     }
+     public static void maxPovtorov(ArrayList<ValuesClass> maxArrIndex) {
+-        ValuesClass max=maxArrIndex.get(0);
+-        for (int i = 1; i < maxArrIndex.size(); i++) {
+-            if(maxArrIndex.get(i).getCountWord()>max.getCountWord()){
+-              max=maxArrIndex.get(i);
+-            }
+-        }
+-        System.out.println("Слово с максимальным кол-вом повторов - " + max.toString());
++        int max = maxArrIndex.stream().mapToInt(ValuesClass::getCountWord).max().getAsInt();
++        System.out.println(maxArrIndex.stream().filter(s-> s.getCountWord() == max).collect(toList()));
+     }
++    /**
++     * -По твоему решению с собственным классом получается, что ты создаешь список со всеми словами,
++     * а потом его заново пробегаешь, считаешь повторения слов и избавляешься от дублей, а кроме того,
++     * перед этим всем, хранишь слова в аррейлисте стринговом. А почему бы сразу не читать слова, добавлять в
++     * список новый объект или брать имеющийся и увеличивать ему поле встречаемости? Так гораздо проще и красивее
++     *
++     * */
+ 
+     public static void main(String[] args) throws IOException {
+         String filename = "C:\\Users\\Ariec\\text.txt";
+-        ArrayList<String > testList = readWordsFromFile2(filename);
+-        testList = sortFromArrayABCD(testList);
+-        ArrayList<ValuesClass> arr1 = countSameWordsFromFile(testList);
+-        printStatArr(arr1);
+-        maxPovtorov(arr1);
++        ArrayList<ValuesClass> arr= readWordsFromFile2(filename);
++        arr  = sortFromArrayABCD(arr);
++        printStatArr(arr);
++        maxPovtorov(arr);
+     }
+ }
+Index: src/packArr/ValuesClass.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package packArr;\n\nimport java.util.Objects;\n\n/**\n * Created by Ariec on 12.07.2019.\n */\npublic class ValuesClass {\n\n    String word;\n    Integer countWord=1;\n\n    public void countPlusOne(){\n        countWord++;\n    }\n\n    public ValuesClass(){\n\n    }\n\n    public ValuesClass(String word) {\n        this.word = word;\n    }\n\n    public ValuesClass(String word, Integer countWord) {\n        this.word = word;\n        this.countWord = countWord;\n    }\n\n    public String getWord() {\n        return word;\n    }\n\n    public void setWord(String word) {\n        this.word = word;\n    }\n\n    public Integer getCountWord() {\n        return countWord;\n    }\n\n    public void setCountWord(Integer countWord) {\n        this.countWord = countWord;\n    }\n\n    @Override\n    public boolean equals(Object o) {\n        if (this == o) return true;\n        if (o == null || getClass() != o.getClass()) return false;\n        ValuesClass valuesClass = (ValuesClass) o;\n        return word.equals(valuesClass.word);\n\n    }\n\n    @Override\n    public int hashCode() {\n        return Objects.hash(word);\n    }\n\n\n    @Override\n    public String toString() {\n        return word + \" count = \" + countWord;\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/packArr/ValuesClass.java	(revision 55e13224b349c66b41fa7635fa4feb5d1c2ef442)
++++ src/packArr/ValuesClass.java	(revision )
+@@ -62,4 +62,13 @@
+     public String toString() {
+         return word + " count = " + countWord;
+     }
++
++    public int compareTo(ValuesClass valuesClass) {
++        int result = this.word.compareTo(valuesClass.word);
++
++        return result;
++    }
++
++
++
+ }
