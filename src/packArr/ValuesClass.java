@@ -8,13 +8,13 @@ import java.util.Objects;
 public class ValuesClass {
 
     String word;
-    Integer countWord=1;
+    Integer countWord = 1;
 
-    public void countPlusOne(){
+    public void countPlusOne() {
         countWord++;
     }
 
-    public ValuesClass(){
+    public ValuesClass() {
 
     }
 
@@ -61,5 +61,12 @@ public class ValuesClass {
     @Override
     public String toString() {
         return word + " count = " + countWord;
+    }
+
+
+    public int compareTo(ValuesClass valuesClass) {
+
+        int result = this.word.compareTo(valuesClass.word);
+        return result;
     }
 }

@@ -8,27 +8,37 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.util.stream.Collectors.toList;
+
 /**
  * Created by Ariec on 12.07.2019.
  */
 public class MainArrayListCLass {
 
-    public static ArrayList<String> readWordsFromFile2(String filename) throws IOException {
+    public static ArrayList<ValuesClass> readWordsFromFile2(String filename) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         String line = null;
-        ArrayList<String> arr = new ArrayList<>();
+        ArrayList<ValuesClass> arr = new ArrayList<>();
+
         while ((line = reader.readLine()) != null) {
             String[] s1 = line.split("\\s+");
-            for (int i = 0; i < s1.length; i++) {
-                arr.add(s1[i]);
+
+            for (String str : s1) {
+                ValuesClass valuesClass=new ValuesClass(str);
+                if(!arr.contains(valuesClass)){
+                    arr.add(valuesClass);
+                }else{
+                    ValuesClass valuesClass1 = arr.get(arr.indexOf(valuesClass));
+                    arr.set(arr.indexOf(valuesClass), new ValuesClass(valuesClass1.getWord(),valuesClass1.getCountWord()+1));
+                }
             }
         }
         return arr;
     }
 
-    public static ArrayList<String> sortFromArrayABCD(ArrayList<String> returnArr) {
+    public static ArrayList<ValuesClass> sortFromArrayABCD(ArrayList<ValuesClass> returnArr) {
         boolean flag = false;
-        String temp;
+        ValuesClass temp;
         while (!flag) {
             flag = true;
             for (int i = 0; i < returnArr.size() - 1; i++) {
@@ -52,20 +62,6 @@ public class MainArrayListCLass {
         return -1;
     }
 
-    public static ArrayList<ValuesClass> countSameWordsFromFile(ArrayList<String> arrayList) {
-        ArrayList<ValuesClass> arr = new ArrayList<>();
-        for (int i = 0; i < arrayList.size(); i++) {
-           String c = arrayList.get(i);
-           int dopF=dopFuncPoiska(arr,c);
-           if(dopF!=-1){
-              ValuesClass abc =  arr.get(dopF);
-              abc.countPlusOne();
-           }else {
-               arr.add(new ValuesClass(c));
-           }
-        }
-        return arr;
-    }
 
     public static void printStatArr(ArrayList<ValuesClass> printArr) {
         for (int i = 0; i <printArr.size() ; i++) {
@@ -73,21 +69,15 @@ public class MainArrayListCLass {
         }
     }
     public static void maxPovtorov(ArrayList<ValuesClass> maxArrIndex) {
-        ValuesClass max=maxArrIndex.get(0);
-        for (int i = 1; i < maxArrIndex.size(); i++) {
-            if(maxArrIndex.get(i).getCountWord()>max.getCountWord()){
-              max=maxArrIndex.get(i);
-            }
-        }
-        System.out.println("Слово с максимальным кол-вом повторов - " + max.toString());
+            int max = maxArrIndex.stream().mapToInt(ValuesClass::getCountWord).max().getAsInt();
+            System.out.println(maxArrIndex.stream().filter(s-> s.getCountWord() == max).collect(toList()));
     }
 
     public static void main(String[] args) throws IOException {
         String filename = "C:\\Users\\Ariec\\text.txt";
-        ArrayList<String > testList = readWordsFromFile2(filename);
+        ArrayList<ValuesClass > testList = readWordsFromFile2(filename);
         testList = sortFromArrayABCD(testList);
-        ArrayList<ValuesClass> arr1 = countSameWordsFromFile(testList);
-        printStatArr(arr1);
-        maxPovtorov(arr1);
+        printStatArr(testList);
+        maxPovtorov(testList);
     }
 }
